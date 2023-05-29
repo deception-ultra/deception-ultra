@@ -1,0 +1,4 @@
+Sample of one liners for powershell
+
+# This line retrieves a list of all services on a computer, including the name, display # name, and status of each service. The list is then exported to a CSV file
+Get-Service | Select-Object Name, DisplayName, Status | Export-Csv services.csv
