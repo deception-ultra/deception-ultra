@@ -2,3 +2,45 @@ Sample of one liners for powershell
 
 # This line retrieves a list of all services on a computer, including the name, display # name, and status of each service. The list is then exported to a CSV file
 Get-Service | Select-Object Name, DisplayName, Status | Export-Csv services.csv
+
+Get a list of all installed applications on a Windows device:
+powershell
+Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table –AutoSize
+
+Get a list of all running processes and their CPU usage:
+powershell
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 | Format-Table -AutoSize
+
+Get a list of all running services and their status:
+powershell
+Get-Service | Select-Object Name, DisplayName, Status | Format-Table -AutoSize
+
+Get a list of all network adapters and their IP addresses:
+powershell
+Get-NetAdapter | Select-Object Name, InterfaceDescription, Status, MacAddress, LinkSpeed, @{Name='IPAddress';Expression={($_.IPAddress).IPAddressToString}} | Format-Table -AutoSize
+
+Get a list of all installed Windows updates:
+powershell
+Get-HotFix | Select-Object HotFixID, InstalledOn, Description | Format-Table -AutoSize
+
+Get a list of all scheduled tasks:
+powershell
+Get-ScheduledTask | Select-Object TaskName, TaskPath, State, LastRunTime, NextRunTime | Format-Table -AutoSize
+
+Get a list of all local user accounts:
+powershell
+Get-LocalUser | Select-Object Name, Description, Enabled | Format-Table -AutoSize
+
+Get a list of all installed printers:
+powershell
+Get-Printer | Select-Object Name, DriverName, PortName, Shared | Format-Table -AutoSize
+
+Get a list of all installed fonts:
+powershell
+Get-ChildItem -Path 'C:\Windows\Fonts' -Filter *.ttf | Select-Object Name, FullName | Format-Table -AutoSize
+
+Get a list of all running virtual machines on a Hyper-V host:
+powershell
+Get-VM | Select-Object Name, State, CPUUsage, MemoryAssigned, Uptime | Format-Table -AutoSize
+
+These one-liners can be used to perform various system administration tasks such as monitoring system resources, managing services, users, and printers, and retrieving information about installed software, updates, and fonts.
